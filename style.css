@@ -710,7 +710,7 @@ footer {
 @media (max-width: 480px) {
   .nav-logo { height: 38px; }
 
-  .hero { padding: 70px 16px 40px; }
+  .hero { padding: 70px 16px 0px; }
   .hero-title { font-size: clamp(60px, 18vw, 100px); margin-bottom: 16px; }
   .hero-eyebrow { font-size: 9px; }
   .hero-body p { font-size: 11px; }
