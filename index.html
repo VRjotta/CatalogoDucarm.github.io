@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DUCARM — Catálogo</title>
+  <meta name="description" content="Catálogo oficial Ducarm House. Streetwear nascido da costura e do grafitti — Vitória da Conquista, BA.">
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Cursor customizado -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- ==========================================
+       NAVEGAÇÃO
+       ========================================== -->
+  <nav>
+    <img class="nav-logo" src="img/logo.png" alt="DUCARM">
+    <ul class="nav-links">
+      <li><a href="#modelos">Modelos</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="https://instagram.com/ducarm_house" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+    <!-- Botão hamburguer — só aparece no mobile -->
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Menu mobile fullscreen -->
+  <div class="nav-mobile" id="navMobile">
+    <button class="nav-mobile-close" id="navClose" aria-label="Fechar menu">✕</button>
+    <a href="#modelos">Modelos</a>
+    <a href="#sobre">Sobre</a>
+    <a href="https://instagram.com/ducarm_house" target="_blank" rel="noopener">@ducarm_house</a>
+  </div>
+
+  <!-- ==========================================
+       HERO BANNER — HISTÓRIA DA MARCA
+       ========================================== -->
+  <section class="hero" id="sobre">
+    <div class="hero-bg"></div>
+    <div class="hero-deco">D</div>
+    <div class="hero-tag">COLEÇÃO 2025 — DROP 01</div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">Vitória da Conquista, BA — Zona Oeste</div>
+
+      <h1 class="hero-title">
+        DUCARM
+      </h1>
+
+      <div class="hero-divider"></div>
+
+      <div class="hero-body">
+        <p>
+          <strong>Nascida de 2 lados artísticos</strong> — a costura e o grafitti — na Zona Oeste de
+          Vitória da Conquista. Na falta da diferença, fizemos nós mesmos. A ferramenta era puramente a vontade.
+        </p>
+        <p>
+          Encontramos <strong>com a tinta e o tecido</strong> uma forma de mostrar nossa arte,
+          e o streetwear foi o palco.
+        </p>
+      </div>
+    </div>
+
+    <div class="hero-scroll">Scroll para ver os drops</div>
+  </section>
+
+  <!-- ==========================================
+       BANNER DA MARCA
+       ========================================== -->
+  <section class="banner-section">
+    <div class="banner-canvas">
+      <!--
+        INSTRUÇÃO: substitua a tag <img> abaixo pelo caminho da sua imagem.
+        Coloque o arquivo dentro da pasta img/ e troque "banner.jpg" pelo nome correto.
+        Tamanho recomendado: 1920 x 800px
+      -->
+      <img
+        src="img/banner.jpg"
+        alt="Ducarm — Banner da marca"
+        class="banner-img"
+        loading="lazy"
+      >
+
+      <!-- Overlay com texto por cima da imagem — apague se não quiser -->
+      <div class="banner-overlay">
+        <span class="banner-label">costura + grafitti</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SEÇÃO DE MODELOS
+       ========================================== -->
+  <section class="modelos" id="modelos">
+    <div class="modelos-intro reveal">
+      <div class="section-label">Catálogo 2025</div>
+      <h2>OS<br>DROPS</h2>
+    </div>
+
+    <!-- ==========================================
+         MODELO 01 — BLACKOUT
+         ========================================== -->
+    <div class="modelo-block">
+
+      <div class="modelo-header reveal">
+        <div class="modelo-name-wrap">
+          <div class="modelo-num">01</div>
+          <div class="modelo-name">BLACKOUT</div>
+        </div>
+        <div class="modelo-meta">
+          <div class="modelo-price">R$ 149</div>
+          <div class="modelo-badge">Disponível</div>
+        </div>
+      </div>
+
+      <!-- Descrição completa do modelo -->
+      <div class="modelo-info reveal">
+        <p class="modelo-descricao-full">
+          A <strong>BLACKOUT</strong> é a peça que começou tudo. Preta no fundo, pesada nas mãos e gritando
+          mesmo no silêncio. A estampa no peito é inspirada nos painéis de metrô de SP — aquela tipografia
+          crua, sem adorno, que você lê de longe e sente de perto. Oversized no corte, ela cai bem em qualquer
+          corpo sem precisar de ajuste. É básico pra quem entende que básico pode ser muito.
+        </p>
+        <div class="modelo-specs">
+          <div class="spec-item">Material: <span>100% algodão fio 30</span></div>
+          <div class="spec-item">Estampa: <span>Serigrafia plastisol preta</span></div>
+          <div class="spec-item">Corte: <span>Oversized</span></div>
+          <div class="spec-item">Tamanhos: <span>P · M · G · GG</span></div>
+        </div>
+        <div class="modelo-specs">
+          <div class="spec-item">Cor: <span>Preto total</span></div>
+          <div class="spec-item">Lavagem: <span>Máquina, frio, ao contrário</span></div>
+          <div class="spec-item">Origem: <span>Produção nacional — SP</span></div>
+        </div>
+      </div>
+
+      <!-- Carrossel de fotos -->
+      <div class="carousel-wrap" data-carousel="0">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <!--
+              INSTRUÇÃO: substitua os blocos .slide-placeholder por tags <img>
+              Exemplo:
+              <img src="img/blackout-frente.jpg" alt="BLACKOUT — Frente" loading="lazy">
+            -->
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#1a1a1a,#0a0a0a)">
+              <span>01A</span>
+            </div>
+            <div class="slide-tag">Frente</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#111,#1e1e1e)">
+              <span>01B</span>
+            </div>
+            <div class="slide-tag">Verso</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#0d0d0d,#1a1a1a)">
+              <span>01C</span>
+            </div>
+            <div class="slide-tag">Detalhe</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#141414,#0a0a0a)">
+              <span>01D</span>
+            </div>
+            <div class="slide-tag">Look</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controles do carrossel -->
+      <div class="carousel-controls">
+        <div class="carousel-dots" data-dots="0"></div>
+        <div class="carousel-arrows">
+          <button class="arrow-btn" data-dir="-1" data-carousel="0" aria-label="Anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15,18 9,12 15,6"/>
+            </svg>
+          </button>
+          <button class="arrow-btn" data-dir="1" data-carousel="0" aria-label="Próximo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9,6 15,12 9,18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Botão de compra -->
+      <div class="buy-section">
+        <a href="#" class="btn-buy" data-modelo="BLACKOUT" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+          <span>Quero essa peça</span>
+        </a>
+        <p class="buy-note">Abre o Direct do Instagram com sua mensagem já preenchida</p>
+      </div>
+
+    </div><!-- /BLACKOUT -->
+
+    <!-- ==========================================
+         MODELO 02 — CONCRETE
+         ========================================== -->
+    <div class="modelo-block">
+
+      <div class="modelo-header reveal">
+        <div class="modelo-name-wrap">
+          <div class="modelo-num">02</div>
+          <div class="modelo-name">CONCRETE</div>
+        </div>
+        <div class="modelo-meta">
+          <div class="modelo-price">R$ 159</div>
+          <div class="modelo-badge">Disponível</div>
+        </div>
+      </div>
+
+      <div class="modelo-info reveal">
+        <p class="modelo-descricao-full">
+          A <strong>CONCRETE</strong> homenageia o concreto armado da periferia — a arquitetura crua que
+          construiu a cidade que ninguém filma. A mescla cinza do tecido não é acidente: é escolha.
+          O print branco no peito e nas costas traz fragmentos de fachadas de SP transformados em gráfico.
+          Uma peça pra quem vive entre o asfalto e o bar, entre o cypher e o trampo.
+        </p>
+        <div class="modelo-specs">
+          <div class="spec-item">Material: <span>Mescla cinza — 70% algodão, 30% poliéster</span></div>
+          <div class="spec-item">Estampa: <span>Print frente e costas, tinta branca</span></div>
+          <div class="spec-item">Corte: <span>Oversized</span></div>
+          <div class="spec-item">Tamanhos: <span>P · M · G · GG</span></div>
+        </div>
+        <div class="modelo-specs">
+          <div class="spec-item">Cor: <span>Mescla cinza médio</span></div>
+          <div class="spec-item">Lavagem: <span>Máquina, frio, ao contrário</span></div>
+          <div class="spec-item">Origem: <span>Produção nacional — SP</span></div>
+        </div>
+      </div>
+
+      <div class="carousel-wrap" data-carousel="1">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#2e2e2e,#1c1c1c)">
+              <span>02A</span>
+            </div>
+            <div class="slide-tag">Frente</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#252525,#323232)">
+              <span>02B</span>
+            </div>
+            <div class="slide-tag">Verso</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#1e1e1e,#2a2a2a)">
+              <span>02C</span>
+            </div>
+            <div class="slide-tag">Detalhe</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#282828,#1c1c1c)">
+              <span>02D</span>
+            </div>
+            <div class="slide-tag">Look</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-controls">
+        <div class="carousel-dots" data-dots="1"></div>
+        <div class="carousel-arrows">
+          <button class="arrow-btn" data-dir="-1" data-carousel="1" aria-label="Anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15,18 9,12 15,6"/>
+            </svg>
+          </button>
+          <button class="arrow-btn" data-dir="1" data-carousel="1" aria-label="Próximo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9,6 15,12 9,18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="buy-section">
+        <a href="#" class="btn-buy" data-modelo="CONCRETE" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+          <span>Quero essa peça</span>
+        </a>
+        <p class="buy-note">Abre o Direct do Instagram com sua mensagem já preenchida</p>
+      </div>
+
+    </div><!-- /CONCRETE -->
+
+    <!-- ==========================================
+         MODELO 03 — CIPHER
+         ========================================== -->
+    <div class="modelo-block">
+
+      <div class="modelo-header reveal">
+        <div class="modelo-name-wrap">
+          <div class="modelo-num">03</div>
+          <div class="modelo-name">CIPHER</div>
+        </div>
+        <div class="modelo-meta">
+          <div class="modelo-price">R$ 169</div>
+          <div class="modelo-badge">Disponível</div>
+        </div>
+      </div>
+
+      <div class="modelo-info reveal">
+        <p class="modelo-descricao-full">
+          A <strong>CIPHER</strong> nasceu de uma roda de rap num estacionamento vazio em Santo André.
+          O nome vem do inglês — aquele círculo onde os MCs se enfrentam no freestyle, onde a rima
+          é a única moeda. Off-white no tom, ela carrega lettering lateral bordado na gola que diz
+          "cada verso é uma saída". Boxy fit pra quem não precisa se ajustar a nada.
+        </p>
+        <div class="modelo-specs">
+          <div class="spec-item">Material: <span>100% algodão penteado fio 30</span></div>
+          <div class="spec-item">Estampa: <span>Lettering lateral bordado</span></div>
+          <div class="spec-item">Corte: <span>Boxy fit</span></div>
+          <div class="spec-item">Tamanhos: <span>P · M · G · GG</span></div>
+        </div>
+        <div class="modelo-specs">
+          <div class="spec-item">Cor: <span>Off-white / cru</span></div>
+          <div class="spec-item">Lavagem: <span>Máquina, frio, ao contrário</span></div>
+          <div class="spec-item">Origem: <span>Produção nacional — SP</span></div>
+        </div>
+      </div>
+
+      <div class="carousel-wrap" data-carousel="2">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#2a2418,#1e1a10)">
+              <span>03A</span>
+            </div>
+            <div class="slide-tag">Frente</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#201c12,#2a2418)">
+              <span>03B</span>
+            </div>
+            <div class="slide-tag">Verso</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#24200e,#1e1a0e)">
+              <span>03C</span>
+            </div>
+            <div class="slide-tag">Detalhe</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#1c1810,#282414)">
+              <span>03D</span>
+            </div>
+            <div class="slide-tag">Look</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-controls">
+        <div class="carousel-dots" data-dots="2"></div>
+        <div class="carousel-arrows">
+          <button class="arrow-btn" data-dir="-1" data-carousel="2" aria-label="Anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15,18 9,12 15,6"/>
+            </svg>
+          </button>
+          <button class="arrow-btn" data-dir="1" data-carousel="2" aria-label="Próximo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9,6 15,12 9,18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="buy-section">
+        <a href="#" class="btn-buy" data-modelo="CIPHER" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+          <span>Quero essa peça</span>
+        </a>
+        <p class="buy-note">Abre o Direct do Instagram com sua mensagem já preenchida</p>
+      </div>
+
+    </div><!-- /CIPHER -->
+
+    <!-- ==========================================
+         MODELO 04 — SIGNAL
+         ========================================== -->
+    <div class="modelo-block">
+
+      <div class="modelo-header reveal">
+        <div class="modelo-name-wrap">
+          <div class="modelo-num">04</div>
+          <div class="modelo-name">SIGNAL</div>
+        </div>
+        <div class="modelo-meta">
+          <div class="modelo-price">R$ 179</div>
+          <div class="modelo-badge">Disponível</div>
+        </div>
+      </div>
+
+      <div class="modelo-info reveal">
+        <p class="modelo-descricao-full">
+          A <strong>SIGNAL</strong> é a mais agressiva do drop. Preta com estampa em vermelho sangue —
+          a paleta do sinal de alerta, da sirene, do aviso que ninguém quis dar.
+          A arte é baseada em intervenções urbanas de grafiteiros anônimos registradas nos muros da Zona Leste.
+          Oversized com costuras reforçadas, pra aguentar a rua do mesmo jeito que você aguenta.
+          Esse não é um drop de moda. É um posicionamento.
+        </p>
+        <div class="modelo-specs">
+          <div class="spec-item">Material: <span>100% algodão fio 30 reforçado</span></div>
+          <div class="spec-item">Estampa: <span>Serigrafia plastisol vermelha</span></div>
+          <div class="spec-item">Corte: <span>Oversized com costuras duplas</span></div>
+          <div class="spec-item">Tamanhos: <span>P · M · G · GG</span></div>
+        </div>
+        <div class="modelo-specs">
+          <div class="spec-item">Cor: <span>Preto / vermelho</span></div>
+          <div class="spec-item">Lavagem: <span>Máquina, frio, ao contrário</span></div>
+          <div class="spec-item">Origem: <span>Produção nacional — SP</span></div>
+        </div>
+      </div>
+
+      <div class="carousel-wrap" data-carousel="3">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#1a0808,#0d0000)">
+              <span>04A</span>
+            </div>
+            <div class="slide-tag">Frente</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#140404,#1a0808)">
+              <span>04B</span>
+            </div>
+            <div class="slide-tag">Verso</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#100404,#1e0a0a)">
+              <span>04C</span>
+            </div>
+            <div class="slide-tag">Detalhe</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background: linear-gradient(135deg,#180606,#0e0202)">
+              <span>04D</span>
+            </div>
+            <div class="slide-tag">Look</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-controls">
+        <div class="carousel-dots" data-dots="3"></div>
+        <div class="carousel-arrows">
+          <button class="arrow-btn" data-dir="-1" data-carousel="3" aria-label="Anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15,18 9,12 15,6"/>
+            </svg>
+          </button>
+          <button class="arrow-btn" data-dir="1" data-carousel="3" aria-label="Próximo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9,6 15,12 9,18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="buy-section">
+        <a href="#" class="btn-buy" data-modelo="SIGNAL" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+          <span>Quero essa peça</span>
+        </a>
+        <p class="buy-note">Abre o Direct do Instagram com sua mensagem já preenchida</p>
+      </div>
+
+    </div><!-- /SIGNAL -->
+
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer>
+    <div>
+      <div class="footer-logo">DUC<span>ARM</span></div>
+      <div class="footer-tagline">costura + grafitti — Vitória da Conquista, BA</div>
+    </div>
+    <div class="footer-links">
+      <a href="https://instagram.com/ducarm_house" target="_blank" rel="noopener">@ducarm_house</a>
+      <a href="/cdn-cgi/l/email-protection#2b4844455f4a5f446b4f5e484a594605484446054959"><span class="__cf_email__" data-cfemail="6c0f0302180d18032c08190f0d1e01420f0301420e1e">[email&#160;protected]</span></a>
+    </div>
+    <div class="footer-copy">
+      <p>© 2025 Ducarm . Todos os direitos reservados.</p>
+      <p>Feito com tinta e t
