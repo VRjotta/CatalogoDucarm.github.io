@@ -112,32 +112,6 @@ document.querySelectorAll('.btn-buy').forEach(btn => {
 });
 
 /* =============================================
-   CURSOR CUSTOMIZADO
-   ============================================= */
-const cursor = document.getElementById('cursor');
-
-if (cursor) {
-  document.addEventListener('mousemove', e => {
-    // Posiciona usando transform pra evitar reflow
-    cursor.style.transform = `translate(${e.clientX - 7}px, ${e.clientY - 7}px)`;
-    cursor.classList.add('visible');
-  });
-
-  document.addEventListener('mouseleave', () => {
-    cursor.classList.remove('visible');
-  });
-
-  document.addEventListener('mouseenter', () => {
-    cursor.classList.add('visible');
-  });
-
-  document.querySelectorAll('a, button, .dot, .carousel-slide').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-  });
-}
-
-/* =============================================
    SCROLL REVEAL — ANIMAÇÃO AO ROLAR
    ============================================= */
 const observer = new IntersectionObserver(entries => {
