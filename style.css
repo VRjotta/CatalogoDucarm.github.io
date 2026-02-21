@@ -681,7 +681,7 @@ footer {
   .nav-toggle { display: flex; }
   .nav-mobile { display: flex; }
 
-  .hero { padding: 80px 20px 48px; }
+  .hero { padding: 80px 20px 32px; min-height: unset; }
   .hero-tag { display: none; }
   .hero-deco { font-size: 200px; right: -16px; bottom: -20px; }
   .hero-body { grid-template-columns: 1fr; gap: 16px; max-width: 100%; }
@@ -710,7 +710,7 @@ footer {
 @media (max-width: 480px) {
   .nav-logo { height: 38px; }
 
-  .hero { padding: 70px 16px 0px; }
+  .hero { padding: 70px 16px 24px; min-height: unset; }
   .hero-title { font-size: clamp(60px, 18vw, 100px); margin-bottom: 16px; }
   .hero-eyebrow { font-size: 9px; }
   .hero-body p { font-size: 11px; }
@@ -736,7 +736,7 @@ footer {
    RESPONSIVE — MOBILE PEQUENO (max 360px)
    ============================================= */
 @media (max-width: 360px) {
-  .hero { padding: 64px 14px 36px; }
+  .hero { padding: 64px 14px 20px; min-height: unset; }
   .carousel-track { padding: 0 14px; }
   .modelo-header,
   .modelo-info,
