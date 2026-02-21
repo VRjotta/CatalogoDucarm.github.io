@@ -5,7 +5,8 @@
 html { scroll-behavior: smooth; }
 img { display: block; max-width: 100%; }
 a { text-decoration: none; color: inherit; }
-button { cursor: pointer; border: none; background: none; font-family: inherit; }
+/* IMPORTANTE: sem cursor:pointer aqui — sobrescreveria o cursor customizado */
+button { border: none; background: none; font-family: inherit; }
 
 /* =============================================
    CUSTOM PROPERTIES
@@ -28,7 +29,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 /* =============================================
-   GRAIN OVERLAY & BODY
+   BODY & GRAIN
    ============================================= */
 body {
   background: var(--black);
@@ -37,9 +38,10 @@ body {
   font-size: 13px;
   line-height: 1.6;
   overflow-x: hidden;
+  cursor: none; /* esconde cursor nativo no desktop */
 }
 
-/* Grain */
+/* Grain overlay */
 body::before {
   content: '';
   position: fixed;
@@ -66,6 +68,26 @@ body::before {
 }
 
 /* =============================================
+   CURSOR CUSTOMIZADO
+   ============================================= */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  background: var(--yellow);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999999;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: width 0.18s ease, height 0.18s ease, border-radius 0.18s ease, opacity 0.15s ease;
+}
+.cursor.visible { opacity: 1; }
+.cursor.hover   { width: 40px; height: 40px; border-radius: 6px; }
+
+/* =============================================
    NAV
    ============================================= */
 nav {
@@ -76,6 +98,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 20px 40px;
+  /* SEM mix-blend-mode — causava cursor invisível */
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
@@ -84,6 +107,7 @@ nav.hidden {
   transform: translateY(-10px);
   pointer-events: none;
 }
+
 .nav-logo {
   height: 50px;
   width: auto;
@@ -91,13 +115,28 @@ nav.hidden {
   filter: brightness(0) invert(1);
 }
 
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-sub);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white);
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.nav-links a:hover { opacity: 1; }
+
 /* =============================================
    BANNER DA MARCA
    ============================================= */
-.banner-section {
-  padding: 0;
-  width: 100%;
-}
+.banner-section { padding: 0; width: 100%; }
 
 .banner-canvas {
   position: relative;
@@ -108,26 +147,18 @@ nav.hidden {
 }
 
 .banner-img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
   transition: transform 0.6s ease;
 }
-
-.banner-canvas:hover .banner-img {
-  transform: scale(1.03);
-}
+.banner-canvas:hover .banner-img { transform: scale(1.03); }
 
 .banner-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(8, 8, 7, 0.7) 0%,
-    transparent 60%
-  );
+  background: linear-gradient(to top, rgba(8,8,7,0.7) 0%, transparent 60%);
   display: flex;
   align-items: flex-end;
   padding: 40px;
@@ -142,18 +173,8 @@ nav.hidden {
   color: var(--yellow);
 }
 
-@media (max-width: 768px) {
-  .banner-canvas {
-    height: clamp(200px, 60vw, 340px);
-  }
-
-  .banner-overlay {
-    padding: 24px 20px;
-  }
-}
-
 /* =============================================
-   HERO BANNER
+   HERO
    ============================================= */
 .hero {
   position: relative;
@@ -230,17 +251,14 @@ nav.hidden {
   animation: fadeUp 0.8s 0.5s forwards;
 }
 
-.hero-title em {
-  font-style: normal;
-  color: var(--yellow);
-  display: block;
-}
+/* Esconde o <em> — evita espaço vazio quando não há subtítulo */
+.hero-title em { display: none; }
 
 .hero-divider {
   width: 1px;
-  height: 80px;
+  height: 60px;
   background: linear-gradient(to bottom, var(--yellow), transparent);
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   opacity: 0;
   animation: fadeUp 0.6s 0.7s forwards;
 }
@@ -254,16 +272,8 @@ nav.hidden {
   animation: fadeUp 0.8s 0.9s forwards;
 }
 
-.hero-body p {
-  font-size: 12px;
-  line-height: 1.8;
-  color: var(--fog);
-}
-
-.hero-body p strong {
-  color: var(--cream);
-  font-weight: 500;
-}
+.hero-body p { font-size: 12px; line-height: 1.8; color: var(--fog); }
+.hero-body p strong { color: var(--cream); font-weight: 500; }
 
 .hero-scroll {
   position: absolute;
@@ -279,12 +289,7 @@ nav.hidden {
   opacity: 0;
   animation: fadeUp 0.6s 1.6s forwards;
 }
-
-.hero-scroll::before {
-  content: '';
-  width: 40px; height: 1px;
-  background: var(--smoke);
-}
+.hero-scroll::before { content: ''; width: 40px; height: 1px; background: var(--smoke); }
 
 .hero-deco {
   position: absolute;
@@ -332,10 +337,7 @@ nav.hidden {
    ============================================= */
 .modelos { padding: 100px 0; }
 
-.modelos-intro {
-  padding: 0 40px;
-  margin-bottom: 80px;
-}
+.modelos-intro { padding: 0 40px; margin-bottom: 80px; }
 
 .modelos-intro h2 {
   font-family: var(--font-display);
@@ -380,9 +382,7 @@ nav.hidden {
   letter-spacing: 0.04em;
 }
 
-/* ---- Descrição do modelo ---- */
 .modelo-info {
-  margin-top: 20px;
   padding: 0 40px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -397,17 +397,9 @@ nav.hidden {
   color: var(--fog);
   grid-column: 1 / -1;
 }
+.modelo-descricao-full strong { color: var(--cream); font-weight: 500; }
 
-.modelo-descricao-full strong {
-  color: var(--cream);
-  font-weight: 500;
-}
-
-.modelo-specs {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+.modelo-specs { display: flex; flex-direction: column; gap: 6px; }
 
 .spec-item {
   display: flex;
@@ -416,21 +408,10 @@ nav.hidden {
   font-size: 11px;
   color: var(--smoke);
 }
+.spec-item::before { content: '—'; color: var(--yellow); font-size: 10px; flex-shrink: 0; }
+.spec-item span { color: var(--cream); font-weight: 500; }
 
-.spec-item::before {
-  content: '—';
-  color: var(--yellow);
-  font-size: 10px;
-}
-
-.spec-item span {
-  color: var(--cream);
-  font-weight: 500;
-}
-
-.modelo-meta {
-  text-align: right;
-}
+.modelo-meta { text-align: right; }
 
 .modelo-price {
   font-family: var(--font-sub);
@@ -457,10 +438,7 @@ nav.hidden {
 /* =============================================
    CARROSSEL
    ============================================= */
-.carousel-wrap {
-  position: relative;
-  overflow: hidden;
-}
+.carousel-wrap { position: relative; overflow: hidden; }
 
 .carousel-track {
   display: flex;
@@ -479,13 +457,7 @@ nav.hidden {
   position: relative;
   background: var(--ash);
 }
-
-.carousel-slide img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
 .carousel-slide:hover img { transform: scale(1.05); }
 
 .slide-tag {
@@ -504,11 +476,8 @@ nav.hidden {
 
 .slide-placeholder {
   width: 100%; height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
 }
-
 .slide-placeholder span {
   font-family: var(--font-display);
   font-size: 80px;
@@ -516,7 +485,6 @@ nav.hidden {
   user-select: none;
 }
 
-/* Controles */
 .carousel-controls {
   padding: 24px 40px 0;
   display: flex;
@@ -531,12 +499,8 @@ nav.hidden {
   background: var(--stone);
   border-radius: 99px;
   transition: background 0.25s, width 0.25s;
-  cursor: pointer;
 }
-.dot.active {
-  width: 48px;
-  background: var(--yellow);
-}
+.dot.active { width: 48px; background: var(--yellow); }
 
 .carousel-arrows { display: flex; gap: 8px; }
 
@@ -550,11 +514,7 @@ nav.hidden {
   color: var(--fog);
   transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
-.arrow-btn:hover {
-  border-color: var(--yellow);
-  color: var(--yellow);
-  background: rgba(240,200,50,0.05);
-}
+.arrow-btn:hover { border-color: var(--yellow); color: var(--yellow); background: rgba(240,200,50,0.05); }
 .arrow-btn svg { width: 18px; height: 18px; }
 
 /* =============================================
@@ -581,11 +541,10 @@ nav.hidden {
   text-transform: uppercase;
   padding: 14px 32px;
   border-radius: 3px;
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  transition: color 0.2s, box-shadow 0.2s, transform 0.15s;
   position: relative;
   overflow: hidden;
 }
-
 .btn-buy::before {
   content: '';
   position: absolute;
@@ -594,18 +553,13 @@ nav.hidden {
   transform: translateX(-101%);
   transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
 }
-
 .btn-buy:hover::before { transform: translateX(0); }
 .btn-buy:hover { color: var(--white); box-shadow: 0 8px 30px rgba(212,58,42,0.3); }
 .btn-buy:active { transform: scale(0.98); }
 .btn-buy span, .btn-buy svg { position: relative; z-index: 1; }
 .btn-buy svg { width: 18px; height: 18px; flex-shrink: 0; }
 
-.buy-note {
-  font-size: 10px;
-  color: var(--smoke);
-  letter-spacing: 0.05em;
-}
+.buy-note { font-size: 10px; color: var(--smoke); letter-spacing: 0.05em; }
 
 /* =============================================
    FOOTER
@@ -620,27 +574,12 @@ footer {
   gap: 40px;
 }
 
-.footer-logo {
-  font-family: var(--font-display);
-  font-size: 48px;
-  color: var(--white);
-  letter-spacing: 0.04em;
-}
+.footer-logo { font-family: var(--font-display); font-size: 48px; color: var(--white); letter-spacing: 0.04em; }
 .footer-logo span { color: var(--yellow); }
 
-.footer-tagline {
-  font-size: 11px;
-  color: var(--smoke);
-  margin-top: 8px;
-  letter-spacing: 0.1em;
-}
+.footer-tagline { font-size: 11px; color: var(--smoke); margin-top: 8px; letter-spacing: 0.1em; }
 
-.footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
 .footer-links a {
   font-family: var(--font-sub);
   font-size: 12px;
@@ -662,12 +601,7 @@ footer {
   flex-wrap: wrap;
   gap: 12px;
 }
-
-.footer-copy p {
-  font-size: 10px;
-  color: var(--smoke);
-  letter-spacing: 0.08em;
-}
+.footer-copy p { font-size: 10px; color: var(--smoke); letter-spacing: 0.08em; }
 
 /* =============================================
    SCROLL REVEAL
@@ -677,10 +611,7 @@ footer {
   transform: translateY(40px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* =============================================
    HAMBURGUER — escondido no desktop
@@ -689,16 +620,12 @@ footer {
   display: none;
   flex-direction: column;
   gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
   padding: 4px;
   z-index: 200;
 }
 .nav-toggle span {
   display: block;
-  width: 26px;
-  height: 2px;
+  width: 26px; height: 2px;
   background: var(--white);
   border-radius: 2px;
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -707,12 +634,11 @@ footer {
 .nav-toggle.open span:nth-child(2) { opacity: 0; }
 .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Menu mobile fullscreen */
 .nav-mobile {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(8, 8, 7, 0.98);
+  background: rgba(8,8,7,0.98);
   z-index: 150;
   flex-direction: column;
   align-items: center;
@@ -722,10 +648,7 @@ footer {
   pointer-events: none;
   transition: opacity 0.35s ease;
 }
-.nav-mobile.open {
-  opacity: 1;
-  pointer-events: all;
-}
+.nav-mobile.open { opacity: 1; pointer-events: all; }
 .nav-mobile a {
   font-family: var(--font-display);
   font-size: clamp(40px, 10vw, 64px);
@@ -738,149 +661,73 @@ footer {
 .nav-mobile-close {
   position: absolute;
   top: 24px; right: 28px;
-  background: none;
-  border: none;
   color: var(--fog);
   font-size: 22px;
-  cursor: pointer;
   transition: color 0.2s;
 }
 .nav-mobile-close:hover { color: var(--yellow); }
-
-/* =============================================
-   CURSOR CUSTOMIZADO — só desktop (pointer: fine)
-   ============================================= */
-@media (pointer: fine) {
-  *, *::before, *::after { cursor: none !important; }
-
-  .cursor-dot,
-  .cursor-ring {
-    position: fixed;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 99999;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-  }
-
-  .cursor-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--white);
-  }
-
-  .cursor-ring {
-    width: 36px;
-    height: 36px;
-    border: 2px solid rgba(245, 240, 232, 0.5);
-    transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
-  }
-
-  .cursor-ring.hover {
-    width: 56px;
-    height: 56px;
-    border-color: var(--yellow);
-  }
-}
 
 /* =============================================
    RESPONSIVE — TABLET (max 768px)
    ============================================= */
 @media (max-width: 768px) {
 
-  /* Nav */
+  /* Desativa cursor customizado no touch */
+  body { cursor: auto; }
+  .cursor { display: none; }
+
   nav { padding: 14px 20px; }
   .nav-links { display: none; }
   .nav-toggle { display: flex; }
   .nav-mobile { display: flex; }
 
-  /* Hero */
   .hero { padding: 80px 20px 48px; }
   .hero-tag { display: none; }
   .hero-deco { font-size: 200px; right: -16px; bottom: -20px; }
   .hero-body { grid-template-columns: 1fr; gap: 16px; max-width: 100%; }
   .hero-scroll { display: none; }
 
-  /* Banner */
   .banner-canvas { height: clamp(180px, 52vw, 320px); }
   .banner-overlay { padding: 20px; }
 
-  /* Modelos */
   .modelos { padding: 60px 0; }
   .modelos-intro { padding: 0 20px; margin-bottom: 48px; }
   .modelo-block { padding: 40px 0; }
   .modelo-header { padding: 0 20px; }
-  .modelo-info {
-    padding: 0 20px;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
+  .modelo-info { padding: 0 20px; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px; }
   .carousel-track { padding: 0 20px; gap: 8px; }
   .carousel-slide { width: clamp(220px, 78vw, 360px); }
   .carousel-controls { padding: 16px 20px 0; }
-  .buy-section {
-    padding: 20px 20px 0;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
+  .buy-section { padding: 20px 20px 0; flex-direction: column; align-items: flex-start; gap: 10px; }
 
-  /* Footer */
-  footer {
-    padding: 40px 20px;
-    flex-direction: column;
-    gap: 28px;
-  }
-  .footer-copy {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
+  footer { padding: 40px 20px; flex-direction: column; gap: 28px; }
+  .footer-copy { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
 
 /* =============================================
    RESPONSIVE — MOBILE (max 480px)
    ============================================= */
 @media (max-width: 480px) {
-
-  /* Nav */
   .nav-logo { height: 38px; }
 
-  /* Hero */
   .hero { padding: 70px 16px 40px; }
   .hero-title { font-size: clamp(60px, 18vw, 100px); margin-bottom: 16px; }
   .hero-eyebrow { font-size: 9px; }
   .hero-body p { font-size: 11px; }
   .hero-deco { display: none; }
-  .hero-divider { height: 48px; margin-bottom: 16px; }
+  .hero-divider { height: 40px; margin-bottom: 14px; }
 
-  /* Modelo header empilhado */
-  .modelo-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
+  .modelo-header { flex-direction: column; align-items: flex-start; gap: 4px; }
   .modelo-meta { text-align: left; }
   .modelo-num { font-size: 52px; }
   .modelo-name { font-size: clamp(30px, 10vw, 48px); }
 
-  /* Carrossel quase full width */
   .carousel-slide { width: clamp(200px, 86vw, 300px); }
 
-  /* Botão de compra full width */
-  .btn-buy {
-    width: 100%;
-    justify-content: center;
-    font-size: 13px;
-    padding: 14px 20px;
-  }
+  .btn-buy { width: 100%; justify-content: center; font-size: 13px; padding: 14px 20px; }
   .buy-note { font-size: 9px; }
 
-  /* Modelos intro */
   .modelos-intro h2 { font-size: clamp(40px, 13vw, 60px); }
-
-  /* Footer */
   .footer-logo { font-size: 36px; }
   .footer-copy p { font-size: 9px; }
 }

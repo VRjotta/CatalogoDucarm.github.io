@@ -4,21 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DUCARM — Catálogo</title>
-  <meta name="description" content="Catálogo oficial Ducarm House. Streetwear nascido da costura e do grafitti — Vitória da Conquista, BA.">
+  <meta name="description" content="Catálogo oficial Ducarm. Streetwear nascido da costura e do grafitti — Vitória da Conquista, BA.">
 
-  <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ==========================================
-       NAVEGAÇÃO
-       ========================================== -->
+  <!-- CURSOR — obrigatório para o cursor customizado funcionar -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- NAV -->
   <nav>
     <img class="nav-logo" src="img/logo.png" alt="DUCARM">
     <ul class="nav-links">
@@ -26,15 +24,12 @@
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="https://instagram.com/ducarm_house" target="_blank" rel="noopener">Instagram</a></li>
     </ul>
-    <!-- Botão hamburguer — só aparece no mobile -->
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <!-- Menu mobile fullscreen -->
+  <!-- MENU MOBILE -->
   <div class="nav-mobile" id="navMobile">
     <button class="nav-mobile-close" id="navClose" aria-label="Fechar menu">✕</button>
     <a href="#modelos">Modelos</a>
@@ -42,9 +37,7 @@
     <a href="https://instagram.com/ducarm_house" target="_blank" rel="noopener">@ducarm_house</a>
   </div>
 
-  <!-- ==========================================
-       HERO BANNER — HISTÓRIA DA MARCA
-       ========================================== -->
+  <!-- HERO -->
   <section class="hero" id="sobre">
     <div class="hero-bg"></div>
     <div class="hero-deco">D</div>
@@ -52,13 +45,8 @@
 
     <div class="hero-content">
       <div class="hero-eyebrow">Vitória da Conquista, BA — Zona Oeste</div>
-
-      <h1 class="hero-title">
-        DUCARM
-      </h1>
-
+      <h1 class="hero-title">DUCARM</h1>
       <div class="hero-divider"></div>
-
       <div class="hero-body">
         <p>
           <strong>Nascida de 2 lados artísticos</strong> — a costura e o grafitti — na Zona Oeste de
@@ -74,44 +62,29 @@
     <div class="hero-scroll">Scroll para ver os drops</div>
   </section>
 
-  <!-- ==========================================
-       BANNER DA MARCA
-       ========================================== -->
+  <!-- BANNER DA MARCA -->
   <section class="banner-section">
     <div class="banner-canvas">
       <!--
-        INSTRUÇÃO: substitua a tag <img> abaixo pelo caminho da sua imagem.
-        Coloque o arquivo dentro da pasta img/ e troque "banner.jpg" pelo nome correto.
+        INSTRUÇÃO: coloque a imagem do banner na pasta img/ e troque o src abaixo.
         Tamanho recomendado: 1920 x 800px
       -->
-      <img
-        src="img/banner.jpg"
-        alt="Ducarm — Banner da marca"
-        class="banner-img"
-        loading="lazy"
-      >
-
-      <!-- Overlay com texto por cima da imagem — apague se não quiser -->
+      <img src="img/banner.jpg" alt="Ducarm — Banner da marca" class="banner-img" loading="lazy">
       <div class="banner-overlay">
         <span class="banner-label">costura + grafitti</span>
       </div>
     </div>
   </section>
 
-  <!-- ==========================================
-       SEÇÃO DE MODELOS
-       ========================================== -->
+  <!-- MODELOS -->
   <section class="modelos" id="modelos">
     <div class="modelos-intro reveal">
       <div class="section-label">Catálogo 2025</div>
       <h2>OS<br>DROPS</h2>
     </div>
 
-    <!-- ==========================================
-         MODELO 01 — BLACKOUT
-         ========================================== -->
+    <!-- MODELO 01 — BLACKOUT -->
     <div class="modelo-block">
-
       <div class="modelo-header reveal">
         <div class="modelo-name-wrap">
           <div class="modelo-num">01</div>
@@ -123,7 +96,6 @@
         </div>
       </div>
 
-      <!-- Descrição completa do modelo -->
       <div class="modelo-info reveal">
         <p class="modelo-descricao-full">
           A <strong>BLACKOUT</strong> é a peça que começou tudo. Preta no fundo, pesada nas mãos e gritando
@@ -140,63 +112,44 @@
         <div class="modelo-specs">
           <div class="spec-item">Cor: <span>Preto total</span></div>
           <div class="spec-item">Lavagem: <span>Máquina, frio, ao contrário</span></div>
-          <div class="spec-item">Origem: <span>Produção nacional — SP</span></div>
+          <div class="spec-item">Origem: <span>Produção nacional — VCA</span></div>
         </div>
       </div>
 
-      <!-- Carrossel de fotos -->
       <div class="carousel-wrap" data-carousel="0">
         <div class="carousel-track">
           <div class="carousel-slide">
-            <!--
-              INSTRUÇÃO: substitua os blocos .slide-placeholder por tags <img>
-              Exemplo:
-              <img src="img/blackout-frente.jpg" alt="BLACKOUT — Frente" loading="lazy">
-            -->
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#1a1a1a,#0a0a0a)">
-              <span>01A</span>
-            </div>
+            <!-- Substitua por: <img src="img/blackout-frente.jpg" alt="BLACKOUT Frente" loading="lazy"> -->
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#1a1a1a,#0a0a0a)"><span>01A</span></div>
             <div class="slide-tag">Frente</div>
           </div>
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#111,#1e1e1e)">
-              <span>01B</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#111,#1e1e1e)"><span>01B</span></div>
             <div class="slide-tag">Verso</div>
           </div>
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#0d0d0d,#1a1a1a)">
-              <span>01C</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#0d0d0d,#1a1a1a)"><span>01C</span></div>
             <div class="slide-tag">Detalhe</div>
           </div>
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#141414,#0a0a0a)">
-              <span>01D</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#141414,#0a0a0a)"><span>01D</span></div>
             <div class="slide-tag">Look</div>
           </div>
         </div>
       </div>
 
-      <!-- Controles do carrossel -->
       <div class="carousel-controls">
         <div class="carousel-dots" data-dots="0"></div>
         <div class="carousel-arrows">
           <button class="arrow-btn" data-dir="-1" data-carousel="0" aria-label="Anterior">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="15,18 9,12 15,6"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
           </button>
           <button class="arrow-btn" data-dir="1" data-carousel="0" aria-label="Próximo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="9,6 15,12 9,18"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,6 15,12 9,18"/></svg>
           </button>
         </div>
       </div>
 
-      <!-- Botão de compra -->
       <div class="buy-section">
         <a href="#" class="btn-buy" data-modelo="BLACKOUT" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -208,14 +161,10 @@
         </a>
         <p class="buy-note">Abre o Direct do Instagram com sua mensagem já preenchida</p>
       </div>
-
     </div><!-- /BLACKOUT -->
 
-    <!-- ==========================================
-         MODELO 02 — CONCRETE
-         ========================================== -->
+    <!-- MODELO 02 — CONCRETE -->
     <div class="modelo-block">
-
       <div class="modelo-header reveal">
         <div class="modelo-name-wrap">
           <div class="modelo-num">02</div>
@@ -231,7 +180,7 @@
         <p class="modelo-descricao-full">
           A <strong>CONCRETE</strong> homenageia o concreto armado da periferia — a arquitetura crua que
           construiu a cidade que ninguém filma. A mescla cinza do tecido não é acidente: é escolha.
-          O print branco no peito e nas costas traz fragmentos de fachadas de SP transformados em gráfico.
+          O print branco no peito e nas costas traz fragmentos de fachadas transformados em gráfico.
           Uma peça pra quem vive entre o asfalto e o bar, entre o cypher e o trampo.
         </p>
         <div class="modelo-specs">
@@ -243,34 +192,26 @@
         <div class="modelo-specs">
           <div class="spec-item">Cor: <span>Mescla cinza médio</span></div>
           <div class="spec-item">Lavagem: <span>Máquina, frio, ao contrário</span></div>
-          <div class="spec-item">Origem: <span>Produção nacional — SP</span></div>
+          <div class="spec-item">Origem: <span>Produção nacional — VCA</span></div>
         </div>
       </div>
 
       <div class="carousel-wrap" data-carousel="1">
         <div class="carousel-track">
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#2e2e2e,#1c1c1c)">
-              <span>02A</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#2e2e2e,#1c1c1c)"><span>02A</span></div>
             <div class="slide-tag">Frente</div>
           </div>
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#252525,#323232)">
-              <span>02B</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#252525,#323232)"><span>02B</span></div>
             <div class="slide-tag">Verso</div>
           </div>
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#1e1e1e,#2a2a2a)">
-              <span>02C</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#1e1e1e,#2a2a2a)"><span>02C</span></div>
             <div class="slide-tag">Detalhe</div>
           </div>
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#282828,#1c1c1c)">
-              <span>02D</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#282828,#1c1c1c)"><span>02D</span></div>
             <div class="slide-tag">Look</div>
           </div>
         </div>
@@ -280,14 +221,10 @@
         <div class="carousel-dots" data-dots="1"></div>
         <div class="carousel-arrows">
           <button class="arrow-btn" data-dir="-1" data-carousel="1" aria-label="Anterior">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="15,18 9,12 15,6"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
           </button>
           <button class="arrow-btn" data-dir="1" data-carousel="1" aria-label="Próximo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="9,6 15,12 9,18"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,6 15,12 9,18"/></svg>
           </button>
         </div>
       </div>
@@ -303,14 +240,10 @@
         </a>
         <p class="buy-note">Abre o Direct do Instagram com sua mensagem já preenchida</p>
       </div>
-
     </div><!-- /CONCRETE -->
 
-    <!-- ==========================================
-         MODELO 03 — CIPHER
-         ========================================== -->
+    <!-- MODELO 03 — CIPHER -->
     <div class="modelo-block">
-
       <div class="modelo-header reveal">
         <div class="modelo-name-wrap">
           <div class="modelo-num">03</div>
@@ -338,34 +271,26 @@
         <div class="modelo-specs">
           <div class="spec-item">Cor: <span>Off-white / cru</span></div>
           <div class="spec-item">Lavagem: <span>Máquina, frio, ao contrário</span></div>
-          <div class="spec-item">Origem: <span>Produção nacional — SP</span></div>
+          <div class="spec-item">Origem: <span>Produção nacional — VCA</span></div>
         </div>
       </div>
 
       <div class="carousel-wrap" data-carousel="2">
         <div class="carousel-track">
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#2a2418,#1e1a10)">
-              <span>03A</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#2a2418,#1e1a10)"><span>03A</span></div>
             <div class="slide-tag">Frente</div>
           </div>
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#201c12,#2a2418)">
-              <span>03B</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#201c12,#2a2418)"><span>03B</span></div>
             <div class="slide-tag">Verso</div>
           </div>
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#24200e,#1e1a0e)">
-              <span>03C</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#24200e,#1e1a0e)"><span>03C</span></div>
             <div class="slide-tag">Detalhe</div>
           </div>
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#1c1810,#282414)">
-              <span>03D</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#1c1810,#282414)"><span>03D</span></div>
             <div class="slide-tag">Look</div>
           </div>
         </div>
@@ -375,14 +300,10 @@
         <div class="carousel-dots" data-dots="2"></div>
         <div class="carousel-arrows">
           <button class="arrow-btn" data-dir="-1" data-carousel="2" aria-label="Anterior">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="15,18 9,12 15,6"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
           </button>
           <button class="arrow-btn" data-dir="1" data-carousel="2" aria-label="Próximo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="9,6 15,12 9,18"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,6 15,12 9,18"/></svg>
           </button>
         </div>
       </div>
@@ -398,14 +319,10 @@
         </a>
         <p class="buy-note">Abre o Direct do Instagram com sua mensagem já preenchida</p>
       </div>
-
     </div><!-- /CIPHER -->
 
-    <!-- ==========================================
-         MODELO 04 — SIGNAL
-         ========================================== -->
+    <!-- MODELO 04 — SIGNAL -->
     <div class="modelo-block">
-
       <div class="modelo-header reveal">
         <div class="modelo-name-wrap">
           <div class="modelo-num">04</div>
@@ -434,34 +351,26 @@
         <div class="modelo-specs">
           <div class="spec-item">Cor: <span>Preto / vermelho</span></div>
           <div class="spec-item">Lavagem: <span>Máquina, frio, ao contrário</span></div>
-          <div class="spec-item">Origem: <span>Produção nacional — SP</span></div>
+          <div class="spec-item">Origem: <span>Produção nacional — VCA</span></div>
         </div>
       </div>
 
       <div class="carousel-wrap" data-carousel="3">
         <div class="carousel-track">
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#1a0808,#0d0000)">
-              <span>04A</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#1a0808,#0d0000)"><span>04A</span></div>
             <div class="slide-tag">Frente</div>
           </div>
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#140404,#1a0808)">
-              <span>04B</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#140404,#1a0808)"><span>04B</span></div>
             <div class="slide-tag">Verso</div>
           </div>
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#100404,#1e0a0a)">
-              <span>04C</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#100404,#1e0a0a)"><span>04C</span></div>
             <div class="slide-tag">Detalhe</div>
           </div>
           <div class="carousel-slide">
-            <div class="slide-placeholder" style="background: linear-gradient(135deg,#180606,#0e0202)">
-              <span>04D</span>
-            </div>
+            <div class="slide-placeholder" style="background:linear-gradient(135deg,#180606,#0e0202)"><span>04D</span></div>
             <div class="slide-tag">Look</div>
           </div>
         </div>
@@ -471,14 +380,10 @@
         <div class="carousel-dots" data-dots="3"></div>
         <div class="carousel-arrows">
           <button class="arrow-btn" data-dir="-1" data-carousel="3" aria-label="Anterior">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="15,18 9,12 15,6"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
           </button>
           <button class="arrow-btn" data-dir="1" data-carousel="3" aria-label="Próximo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="9,6 15,12 9,18"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,6 15,12 9,18"/></svg>
           </button>
         </div>
       </div>
@@ -494,14 +399,11 @@
         </a>
         <p class="buy-note">Abre o Direct do Instagram com sua mensagem já preenchida</p>
       </div>
-
     </div><!-- /SIGNAL -->
 
   </section>
 
-  <!-- ==========================================
-       FOOTER
-       ========================================== -->
+  <!-- FOOTER -->
   <footer>
     <div>
       <div class="footer-logo">DUC<span>ARM</span></div>
@@ -509,8 +411,14 @@
     </div>
     <div class="footer-links">
       <a href="https://instagram.com/ducarm_house" target="_blank" rel="noopener">@ducarm_house</a>
-      <a href="/cdn-cgi/l/email-protection#2b4844455f4a5f446b4f5e484a594605484446054959"><span class="__cf_email__" data-cfemail="6c0f0302180d18032c08190f0d1e01420f0301420e1e">[email&#160;protected]</span></a>
+      <a href="mailto:contato@ducarm.com.br">contato@ducarm.com.br</a>
     </div>
     <div class="footer-copy">
-      <p>© 2025 Ducarm . Todos os direitos reservados.</p>
-      <p>Feito com tinta e t
+      <p>© 2025 Ducarm. Todos os direitos reservados.</p>
+      <p>Feito com tinta e costura — Vitória da Conquista, BA</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
