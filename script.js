@@ -146,6 +146,42 @@ window.addEventListener('scroll', () => {
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 /* =============================================
+   CURSOR CUSTOMIZADO — só desktop (pointer: fine)
+   ============================================= */
+if (window.matchMedia('(pointer: fine)').matches) {
+  const cursorDot  = document.createElement('div');
+  const cursorRing = document.createElement('div');
+  cursorDot.className  = 'cursor-dot';
+  cursorRing.className = 'cursor-ring';
+  document.body.appendChild(cursorDot);
+  document.body.appendChild(cursorRing);
+
+  let mouseX = 0, mouseY = 0;
+  let ringX  = 0, ringY  = 0;
+
+  window.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top  = mouseY + 'px';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top  = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .btn-buy, .arrow-btn, .dot').forEach(el => {
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+  });
+}
+
+/* =============================================
    MENU HAMBURGUER — MOBILE
    ============================================= */
 const navToggle = document.getElementById('navToggle');
