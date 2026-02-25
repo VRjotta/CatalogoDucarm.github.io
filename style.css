@@ -51,6 +51,7 @@ body::before {
   opacity: 0.04;
   pointer-events: none;
   z-index: 9998;
+  will-change: transform; /* promove para camada GPU — evita repaint no main thread */
   animation: grain 0.8s steps(2) infinite;
 }
 
@@ -351,6 +352,7 @@ nav.hidden {
   padding: 60px 0;
   border-top: 1px solid var(--stone);
   overflow: hidden;
+  contain: layout style; /* isola recálculos de layout — melhora scroll em listas longas */
 }
 .modelo-block:last-child { border-bottom: 1px solid var(--stone); }
 

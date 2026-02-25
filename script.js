@@ -15,7 +15,6 @@ const MENSAGENS = {
    UTILITÁRIOS
    ============================================= */
 
-/* Debounce — evita múltiplos recálculos no resize */
 function debounce(fn, delay) {
   let timer;
   return (...args) => {
@@ -25,8 +24,37 @@ function debounce(fn, delay) {
 }
 
 /* =============================================
-   CARROSSÉIS
-   ============================================= */
+   CARROSSÉIS — autoplay centralizado
+   =============================================
+   CORREÇÃO: antes, cada carrossel registrava seu próprio
+   visibilitychange listener (4 no total). Ao voltar à aba,
+   4 intervalos novos eram criados por carrossel — acumulando
+   indefinidamente. Agora há um Map central e 1 listener único.
+*/
+const autoplayIntervals = new Map();
+const AUTOPLAY_MS = 3500;
+
+function startAutoplay(id, fn) {
+  stopAutoplay(id);
+  autoplayIntervals.set(id, setInterval(fn, AUTOPLAY_MS));
+}
+
+function stopAutoplay(id) {
+  const existing = autoplayIntervals.get(id);
+  if (existing != null) {
+    clearInterval(existing);
+    autoplayIntervals.delete(id);
+  }
+}
+
+/* Listener único de visibilitychange para todos os carrosséis */
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    autoplayIntervals.forEach((_, id) => stopAutoplay(id));
+  }
+  /* Retomada: cada wrap faz isso no próprio mouseleave / touchend */
+});
+
 document.querySelectorAll('.carousel-wrap').forEach(wrap => {
   const id     = parseInt(wrap.dataset.carousel);
   const track  = wrap.querySelector('.carousel-track');
@@ -36,9 +64,8 @@ document.querySelectorAll('.carousel-wrap').forEach(wrap => {
   let startX   = 0;
   let startY   = 0;
   let isDragging   = false;
-  let isHorizontal = null; /* detecta direção do swipe antes de decidir ação */
+  let isHorizontal = null;
 
-  /* Dots */
   const dotsWrap = document.querySelector(`.carousel-dots[data-dots="${id}"]`);
   slides.forEach((_, i) => {
     const dot = document.createElement('div');
@@ -58,6 +85,8 @@ document.querySelectorAll('.carousel-wrap').forEach(wrap => {
     });
   }
 
+  const advanceFn = () => goTo(idx + 1);
+
   /* Setas */
   wrap.closest('.modelo-block').querySelectorAll('.arrow-btn').forEach(btn => {
     if (parseInt(btn.dataset.carousel) === id) {
@@ -65,11 +94,11 @@ document.querySelectorAll('.carousel-wrap').forEach(wrap => {
     }
   });
 
-  /* ---- Swipe touch com detecção de direção ---- */
+  /* ---- Swipe touch ---- */
   track.addEventListener('touchstart', e => {
-    startX       = e.touches[0].clientX;
-    startY       = e.touches[0].clientY;
-    isDragging   = true;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    isDragging = true;
     isHorizontal = null;
   }, { passive: true });
 
@@ -77,7 +106,6 @@ document.querySelectorAll('.carousel-wrap').forEach(wrap => {
     if (!isDragging) return;
     const dx = e.touches[0].clientX - startX;
     const dy = e.touches[0].clientY - startY;
-    /* Determina direção na primeira movimentação detectável */
     if (isHorizontal === null && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) {
       isHorizontal = Math.abs(dx) > Math.abs(dy);
     }
@@ -86,51 +114,49 @@ document.querySelectorAll('.carousel-wrap').forEach(wrap => {
   track.addEventListener('touchend', e => {
     if (!isDragging || !isHorizontal) { isDragging = false; return; }
     const diff = startX - e.changedTouches[0].clientX;
-    /* threshold 30px — mais sensível que mouse */
     if (Math.abs(diff) > 30) goTo(idx + (diff > 0 ? 1 : -1));
-    isDragging   = false;
+    isDragging = false;
     isHorizontal = null;
   }, { passive: true });
 
-  /* ---- Arrastar com mouse (desktop) ---- */
-  track.addEventListener('mousedown', e => {
-    startX               = e.clientX;
-    isDragging           = true;
-    track.style.transition = 'none';
-  });
+  /* ---- Arrastar com mouse (desktop) ----
+     CORREÇÃO: mouseup agora usa AbortController para auto-remover
+     o listener após o uso, evitando acúmulo no window.
+  */
+  let dragController = null;
 
-  window.addEventListener('mouseup', e => {
-    if (!isDragging) return;
-    const diff = startX - e.clientX;
-    track.style.transition = '';
-    if (Math.abs(diff) > 40) goTo(idx + (diff > 0 ? 1 : -1));
-    isDragging = false;
+  track.addEventListener('mousedown', e => {
+    startX = e.clientX;
+    isDragging = true;
+    track.style.transition = 'none';
+
+    if (dragController) dragController.abort();
+    dragController = new AbortController();
+
+    window.addEventListener('mouseup', e => {
+      if (!isDragging) return;
+      const diff = startX - e.clientX;
+      track.style.transition = '';
+      if (Math.abs(diff) > 40) goTo(idx + (diff > 0 ? 1 : -1));
+      isDragging = false;
+      dragController.abort();
+      dragController = null;
+    }, { signal: dragController.signal });
   });
 
   /* ---- Autoplay ---- */
-  let autoplay = setInterval(() => goTo(idx + 1), 3500);
+  startAutoplay(id, advanceFn);
 
-  /* Pausa quando usuário sai da aba — economiza bateria */
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      clearInterval(autoplay);
-    } else {
-      autoplay = setInterval(() => goTo(idx + 1), 3500);
-    }
-  });
-
-  wrap.addEventListener('mouseenter', () => clearInterval(autoplay));
+  wrap.addEventListener('mouseenter', () => stopAutoplay(id));
   wrap.addEventListener('mouseleave', () => {
-    autoplay = setInterval(() => goTo(idx + 1), 3500);
+    if (!document.hidden) startAutoplay(id, advanceFn);
   });
 
-  /* Pausa autoplay no touch enquanto usuário interage */
-  wrap.addEventListener('touchstart', () => clearInterval(autoplay), { passive: true });
+  wrap.addEventListener('touchstart', () => stopAutoplay(id), { passive: true });
   wrap.addEventListener('touchend', () => {
-    autoplay = setInterval(() => goTo(idx + 1), 3500);
+    if (!document.hidden) startAutoplay(id, advanceFn);
   }, { passive: true });
 
-  /* Debounce no resize — evita recalcular dezenas de vezes por segundo */
   window.addEventListener('resize', debounce(() => goTo(idx), 150));
 });
 
@@ -141,8 +167,8 @@ document.querySelectorAll('.btn-buy').forEach(btn => {
   btn.addEventListener('click', e => {
     e.preventDefault();
     const modelo = btn.dataset.modelo;
-    const msg    = MENSAGENS[modelo] || `Olá! Vi o catálogo da Ducarm e gostaria de mais informações sobre os modelos disponíveis.`;
-    const url    = `https://ig.me/m/${INSTAGRAM_USER}?text=${encodeURIComponent(msg)}`;
+    const msg = MENSAGENS[modelo] || `Olá! Vi o catálogo da Ducarm e gostaria de mais informações sobre os modelos disponíveis.`;
+    const url = `https://ig.me/m/${INSTAGRAM_USER}?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   });
 });
@@ -152,7 +178,6 @@ document.querySelectorAll('.btn-buy').forEach(btn => {
    ============================================= */
 const cursor = document.getElementById('cursor');
 
-/* (pointer: fine) = mouse preciso — não executa em touchscreen */
 if (cursor && window.matchMedia('(pointer: fine)').matches) {
   document.addEventListener('mousemove', e => {
     cursor.style.left = e.clientX + 'px';
@@ -179,7 +204,7 @@ const observer = new IntersectionObserver(entries => {
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.12 }); /* 0.12 revela um pouco antes — melhor no mobile */
+}, { threshold: 0.12 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -189,7 +214,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 const nav       = document.querySelector('nav');
 let lastScrollY = 0;
 
-/* passive: true — não bloqueia a thread principal durante o scroll */
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
   if (scrollY > 80 && scrollY > lastScrollY) {
@@ -226,7 +250,6 @@ if (navMobile) {
   navMobile.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', closeMenu);
   });
-  /* Fecha ao clicar no fundo escuro do menu */
   navMobile.addEventListener('click', e => {
     if (e.target === navMobile) closeMenu();
   });
