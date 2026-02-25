@@ -446,6 +446,7 @@ nav.hidden {
   padding: 0 40px;
   transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
+  touch-action: pan-y pinch-zoom; /* permite scroll vertical, captura swipe horizontal */
 }
 
 .carousel-slide {
@@ -492,20 +493,25 @@ nav.hidden {
   justify-content: space-between;
 }
 
-.carousel-dots { display: flex; gap: 8px; }
+.carousel-dots { display: flex; gap: 8px; align-items: center; }
 
 .dot {
   width: 24px; height: 3px;
   background: var(--stone);
   border-radius: 99px;
   transition: background 0.25s, width 0.25s;
+  cursor: pointer;
+  /* área de toque maior sem mudar visual */
+  padding: 10px 0;
+  margin: -10px 0;
+  box-sizing: content-box;
 }
 .dot.active { width: 48px; background: var(--yellow); }
 
 .carousel-arrows { display: flex; gap: 8px; }
 
 .arrow-btn {
-  width: 44px; height: 44px;
+  width: 48px; height: 48px; /* 48px = tamanho mínimo recomendado para toque */
   border: 1px solid var(--stone);
   border-radius: 3px;
   display: flex;
@@ -673,7 +679,12 @@ footer {
 @media (max-width: 768px) {
 
   /* Desativa cursor customizado no touch */
-  body { cursor: auto; }
+  body {
+    cursor: auto;
+    /* Melhora legibilidade e evita zoom acidental em inputs */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
   .cursor { display: none; }
 
   nav { padding: 14px 20px; }
@@ -684,7 +695,9 @@ footer {
   .hero { padding: 80px 20px 32px; min-height: unset; }
   .hero-tag { display: none; }
   .hero-deco { font-size: 200px; right: -16px; bottom: -20px; }
+  /* Aumenta line-height no mobile para melhor leitura */
   .hero-body { grid-template-columns: 1fr; gap: 16px; max-width: 100%; }
+  .hero-body p { line-height: 1.9; }
   .hero-scroll { display: none; }
 
   .banner-canvas { height: clamp(180px, 52vw, 320px); }
@@ -695,13 +708,27 @@ footer {
   .modelo-block { padding: 40px 0; }
   .modelo-header { padding: 0 20px; }
   .modelo-info { padding: 0 20px; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px; }
+  /* Aumenta espaçamento entre spec-items para dedos largos */
+  .spec-item { padding: 4px 0; font-size: 12px; }
+  .modelo-descricao-full { font-size: 13px; line-height: 2; }
+
   .carousel-track { padding: 0 20px; gap: 8px; }
   .carousel-slide { width: clamp(220px, 78vw, 360px); }
   .carousel-controls { padding: 16px 20px 0; }
+  /* Esconde as setas no mobile — swipe é mais natural */
+  .carousel-arrows { display: none; }
+  /* Dots maiores e mais espaçados para toque */
+  .dot { width: 32px; }
+  .dot.active { width: 56px; }
+
   .buy-section { padding: 20px 20px 0; flex-direction: column; align-items: flex-start; gap: 10px; }
+  /* Botão de compra com altura mínima confortável para toque */
+  .btn-buy { min-height: 52px; }
 
   footer { padding: 40px 20px; flex-direction: column; gap: 28px; }
   .footer-copy { flex-direction: column; align-items: flex-start; gap: 6px; }
+  /* Links do footer maiores para toque */
+  .footer-links a { padding: 6px 0; font-size: 13px; }
 }
 
 /* =============================================

@@ -12,17 +12,33 @@ const MENSAGENS = {
 };
 
 /* =============================================
+   UTILITÁRIOS
+   ============================================= */
+
+/* Debounce — evita múltiplos recálculos no resize */
+function debounce(fn, delay) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
+}
+
+/* =============================================
    CARROSSÉIS
    ============================================= */
 document.querySelectorAll('.carousel-wrap').forEach(wrap => {
-  const id       = parseInt(wrap.dataset.carousel);
-  const track    = wrap.querySelector('.carousel-track');
-  const slides   = Array.from(track.querySelectorAll('.carousel-slide'));
-  const total    = slides.length;
-  let idx        = 0; /* renomeado de 'current' para não conflitar com o scroll listener */
-  let startX     = 0;
-  let isDragging = false;
+  const id     = parseInt(wrap.dataset.carousel);
+  const track  = wrap.querySelector('.carousel-track');
+  const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+  const total  = slides.length;
+  let idx      = 0;
+  let startX   = 0;
+  let startY   = 0;
+  let isDragging   = false;
+  let isHorizontal = null; /* detecta direção do swipe antes de decidir ação */
 
+  /* Dots */
   const dotsWrap = document.querySelector(`.carousel-dots[data-dots="${id}"]`);
   slides.forEach((_, i) => {
     const dot = document.createElement('div');
@@ -35,10 +51,8 @@ document.querySelectorAll('.carousel-wrap').forEach(wrap => {
     if (index < 0)      index = total - 1;
     if (index >= total) index = 0;
     idx = index;
-
-    const slideWidth = slides[0].offsetWidth + 12; /* 12 = gap do CSS */
+    const slideWidth = slides[0].offsetWidth + 12;
     track.style.transform = `translateX(-${idx * slideWidth}px)`;
-
     dotsWrap.querySelectorAll('.dot').forEach((d, i) => {
       d.classList.toggle('active', i === idx);
     });
@@ -51,23 +65,37 @@ document.querySelectorAll('.carousel-wrap').forEach(wrap => {
     }
   });
 
-  /* Swipe touch */
+  /* ---- Swipe touch com detecção de direção ---- */
   track.addEventListener('touchstart', e => {
-    startX     = e.touches[0].clientX;
-    isDragging = true;
+    startX       = e.touches[0].clientX;
+    startY       = e.touches[0].clientY;
+    isDragging   = true;
+    isHorizontal = null;
+  }, { passive: true });
+
+  track.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const dx = e.touches[0].clientX - startX;
+    const dy = e.touches[0].clientY - startY;
+    /* Determina direção na primeira movimentação detectável */
+    if (isHorizontal === null && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) {
+      isHorizontal = Math.abs(dx) > Math.abs(dy);
+    }
   }, { passive: true });
 
   track.addEventListener('touchend', e => {
-    if (!isDragging) return;
+    if (!isDragging || !isHorizontal) { isDragging = false; return; }
     const diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) goTo(idx + (diff > 0 ? 1 : -1));
-    isDragging = false;
+    /* threshold 30px — mais sensível que mouse */
+    if (Math.abs(diff) > 30) goTo(idx + (diff > 0 ? 1 : -1));
+    isDragging   = false;
+    isHorizontal = null;
   }, { passive: true });
 
-  /* Arrastar com mouse */
+  /* ---- Arrastar com mouse (desktop) ---- */
   track.addEventListener('mousedown', e => {
-    startX           = e.clientX;
-    isDragging       = true;
+    startX               = e.clientX;
+    isDragging           = true;
     track.style.transition = 'none';
   });
 
@@ -79,15 +107,31 @@ document.querySelectorAll('.carousel-wrap').forEach(wrap => {
     isDragging = false;
   });
 
-  /* Autoplay */
+  /* ---- Autoplay ---- */
   let autoplay = setInterval(() => goTo(idx + 1), 3500);
+
+  /* Pausa quando usuário sai da aba — economiza bateria */
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      clearInterval(autoplay);
+    } else {
+      autoplay = setInterval(() => goTo(idx + 1), 3500);
+    }
+  });
+
   wrap.addEventListener('mouseenter', () => clearInterval(autoplay));
   wrap.addEventListener('mouseleave', () => {
     autoplay = setInterval(() => goTo(idx + 1), 3500);
   });
 
-  /* Recalcula no resize */
-  window.addEventListener('resize', () => goTo(idx));
+  /* Pausa autoplay no touch enquanto usuário interage */
+  wrap.addEventListener('touchstart', () => clearInterval(autoplay), { passive: true });
+  wrap.addEventListener('touchend', () => {
+    autoplay = setInterval(() => goTo(idx + 1), 3500);
+  }, { passive: true });
+
+  /* Debounce no resize — evita recalcular dezenas de vezes por segundo */
+  window.addEventListener('resize', debounce(() => goTo(idx), 150));
 });
 
 /* =============================================
@@ -104,13 +148,13 @@ document.querySelectorAll('.btn-buy').forEach(btn => {
 });
 
 /* =============================================
-   CURSOR CUSTOMIZADO
+   CURSOR CUSTOMIZADO (desktop only)
    ============================================= */
 const cursor = document.getElementById('cursor');
 
-if (cursor) {
+/* (pointer: fine) = mouse preciso — não executa em touchscreen */
+if (cursor && window.matchMedia('(pointer: fine)').matches) {
   document.addEventListener('mousemove', e => {
-    /* usa transform para performance — sem reflow */
     cursor.style.left = e.clientX + 'px';
     cursor.style.top  = e.clientY + 'px';
     cursor.classList.add('visible');
@@ -119,7 +163,6 @@ if (cursor) {
   document.addEventListener('mouseleave', () => cursor.classList.remove('visible'));
   document.addEventListener('mouseenter', () => cursor.classList.add('visible'));
 
-  /* Expande em elementos clicáveis */
   document.querySelectorAll('a, button, .dot, .carousel-slide').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
@@ -136,16 +179,17 @@ const observer = new IntersectionObserver(entries => {
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.15 });
+}, { threshold: 0.12 }); /* 0.12 revela um pouco antes — melhor no mobile */
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 /* =============================================
    NAV — ESCONDER AO ROLAR
    ============================================= */
-const nav        = document.querySelector('nav');
-let lastScrollY  = 0; /* renomeado — evita conflito com 'current' dos carrosséis */
+const nav       = document.querySelector('nav');
+let lastScrollY = 0;
 
+/* passive: true — não bloqueia a thread principal durante o scroll */
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
   if (scrollY > 80 && scrollY > lastScrollY) {
@@ -154,7 +198,7 @@ window.addEventListener('scroll', () => {
     nav.classList.remove('hidden');
   }
   lastScrollY = scrollY;
-});
+}, { passive: true });
 
 /* =============================================
    MENU HAMBURGUER — MOBILE
@@ -166,7 +210,7 @@ const navClose  = document.getElementById('navClose');
 function openMenu() {
   navToggle.classList.add('open');
   navMobile.classList.add('open');
-  document.body.style.overflow = 'hidden'; /* trava scroll ao abrir */
+  document.body.style.overflow = 'hidden';
 }
 
 function closeMenu() {
@@ -181,5 +225,9 @@ if (navClose)  navClose.addEventListener('click', closeMenu);
 if (navMobile) {
   navMobile.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', closeMenu);
+  });
+  /* Fecha ao clicar no fundo escuro do menu */
+  navMobile.addEventListener('click', e => {
+    if (e.target === navMobile) closeMenu();
   });
 }
