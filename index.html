@@ -6,15 +6,9 @@
   <title>DUCARM — Catálogo</title>
   <meta name="description" content="Catálogo oficial Ducarm. Streetwear nascido da costura e do grafitti — Vitória da Conquista, BA.">
 
-  <!-- Cor da barra do navegador no Android -->
-  <meta name="theme-color" content="#080807">
-
-  <!-- Fontes: display=swap evita texto invisível durante carregamento -->
-  <!-- Pesos reduzidos: removidos os não usados (wght@300 e wght@400 do Barlow) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@600;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -24,7 +18,7 @@
 
   <!-- NAV -->
   <nav>
-    <img class="nav-logo" src="img/logo.png" alt="DUCARM" fetchpriority="high" decoding="async">
+    <img class="nav-logo" src="img/logo.png" alt="DUCARM">
     <ul class="nav-links">
       <li><a href="#modelos">Modelos</a></li>
       <li><a href="#sobre">Sobre</a></li>
@@ -72,16 +66,10 @@
   <section class="banner-section">
     <div class="banner-canvas">
       <!--
-        INSTRUÇÃO: forneça 2 versões do banner:
-          img/banner-mobile.jpg → até 800px de largura (ex: 800x600px)
-          img/banner.jpg        → versão desktop (ex: 1920x800px)
-        Use WebP quando possível para melhor performance.
+        INSTRUÇÃO: coloque a imagem do banner na pasta img/ e troque o src abaixo.
+        Tamanho recomendado: 1920 x 800px
       -->
-      <picture>
-        <source media="(max-width: 768px)" srcset="img/banner-mobile.jpg">
-        <img src="img/banner.jpg" alt="Ducarm — Banner da marca" class="banner-img"
-             loading="lazy" decoding="async" width="1920" height="800">
-      </picture>
+      <img src="img/banner.jpg" alt="Ducarm — Banner da marca" class="banner-img" loading="lazy">
       <div class="banner-overlay">
         <span class="banner-label">costura + grafitti</span>
       </div>
@@ -427,4 +415,10 @@
     </div>
     <div class="footer-copy">
       <p>© 2025 Ducarm. Todos os direitos reservados.</p>
-      
+      <p>Feito com tinta e costura — Vitória da Conquista, BA</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
