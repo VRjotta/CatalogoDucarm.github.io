@@ -775,3 +775,20 @@ footer {
   footer { padding: 28px 14px; }
   .carousel-slide { width: 88vw; }
 }
+/* =============================================
+   AVISO IA
+   ============================================= */
+.ai-note {
+  padding: 10px 40px 0;
+  font-size: 10px;
+  color: var(--smoke);
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 768px) {
+  .ai-note { padding: 8px 20px 0; }
+}
+
+@media (max-width: 360px) {
+  .ai-note { padding: 8px 14px 0; }
+}
