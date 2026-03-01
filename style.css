@@ -786,9 +786,15 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .ai-note { padding: 8px 20px 0; }
+  .ai-note {
+    padding: 0 20px;
+    margin-top: 20px;
+  }
 }
 
 @media (max-width: 360px) {
-  .ai-note { padding: 8px 14px 0; }
+  .ai-note {
+    padding: 0 14px;
+    margin-top: 20px;
+  }
 }
